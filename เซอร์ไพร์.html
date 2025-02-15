@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Theme</title>
+    <style>
+        body {
+            background-color: #ffdde1;
+            color: #d63384;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 50px;
+            padding: 20px;
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: floatUp 5s infinite linear;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+        @media (max-width: 768px) {
+            .container {
+                margin-top: 30px;
+                font-size: 16px;
+            }
+            .heart {
+                font-size: 15px;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                margin-top: 20px;
+                font-size: 14px;
+            }
+            .heart {
+                font-size: 12px;
+            }
+        }
+
+        /* กล่องของขวัญ */
+        .gift-box {
+            width: 150px;
+            height: 150px;
+            background-color: #ff1493;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 15px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* สไตล์ป็อบอัพ */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 3px solid #d63384;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+        .popup img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+        }
+        .popup .message {
+            font-size: 20px;
+            color: #d63384;
+        }
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Happy Valentine's Day! 💖</h1>
+        <p>แด่ ผักบุ้งนับบบบ</p>
+        <!-- กล่องของขวัญ -->
+        <img class="gift-gif" src="https://cdn.dribbble.com/userupload/24197023/file/original-be0857d720bbca7afd25135241a0fdb6.gif" onclick="showPopup()" alt="Gift GIF">
+    </div>
+    
+    <!-- ป็อบอัพ -->
+    <div class="popup-overlay" id="popup-overlay"></div>
+    <div class="popup" id="popup">
+        <img src="https://media.tenor.com/DUWDTiOJmHkAAAAM/moti-hearts.gif" alt="Flower">
+        <div class="message">Wish you find someone who truly deserves you on Valentine's Day. 
+            แปลออกมั้ยน้องสาว💐</div>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="/music/Proud.mp3" type="audio/mpeg">
+        <source src="/music/Proud.ogg" type="audio/ogg">
+    </audio>
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            document.body.appendChild(heart);
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 500);
+
+        function playMusic() {
+            const audio = document.getElementById('bg-music');
+            audio.play().catch(error => console.log('Autoplay blocked:', error)); // จับ error ถ้าถูกบล็อก
+        }
+
+        // แสดงป็อบอัพ
+        function showPopup() {
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('popup-overlay').style.display = 'block';
+        }
+
+        // ปิดป็อบอัพ
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('popup-overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
